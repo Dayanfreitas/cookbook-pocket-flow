@@ -71,6 +71,22 @@ pipenv shell
 python main.py
 ```
 
+## Expected Output
+
+When running the example, you'll see an output similar to this:
+
+```
+=== Listing your calendars ===
+- Primary Calendar
+- Work
+- Personal
+
+=== Creating an example event ===
+Event created successfully!
+Event ID: abc123xyz
+```
+
+
 ## 📁 Project Structure
 
 ```
