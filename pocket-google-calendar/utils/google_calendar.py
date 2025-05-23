@@ -10,7 +10,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-CALENDAR_ID = os.getenv('CALENDAR_ID')
+CALENDAR_ID = os.getenv('GOOGLE_CALENDAR_ID')
+GOOGLE_APPLICATION_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+TIMEZONE = os.getenv('TIMEZONE')
+
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 def get_calendar_service():
@@ -25,14 +28,14 @@ def get_calendar_service():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
+                GOOGLE_APPLICATION_CREDENTIALS, SCOPES)
             creds = flow.run_local_server(port=0)
         with open('token.pickle', 'wb') as token:
             pickle.dump(creds, token)
 
     return build('calendar', 'v3', credentials=creds)
 
-def create_event(summary, description, start_time, end_time, timezone='America/Sao_Paulo'):
+def create_event(summary, description, start_time, end_time, timezone=TIMEZONE):
     """Cria um novo evento no Google Calendar."""
     service = get_calendar_service()
     
@@ -77,7 +80,7 @@ def create_custom_calendar(calendar_name, description=""):
     calendar = {
         'summary': calendar_name,
         'description': description,
-        'timeZone': 'America/Sao_Paulo'
+        'timeZone': TIMEZONE
     }
 
     created_calendar = service.calendars().insert(body=calendar).execute()
