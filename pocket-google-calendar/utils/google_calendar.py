@@ -17,7 +17,7 @@ TIMEZONE = os.getenv('TIMEZONE')
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 def get_calendar_service():
-    """Obtém o serviço do Google Calendar autenticado."""
+    """Gets the authenticated Google Calendar service."""
     creds = None
     if os.path.exists('token.pickle'):
         with open('token.pickle', 'rb') as token:
@@ -36,7 +36,7 @@ def get_calendar_service():
     return build('calendar', 'v3', credentials=creds)
 
 def create_event(summary, description, start_time, end_time, timezone=TIMEZONE):
-    """Cria um novo evento no Google Calendar."""
+    """Creates a new event in Google Calendar."""
     service = get_calendar_service()
     
     event = {
@@ -56,7 +56,7 @@ def create_event(summary, description, start_time, end_time, timezone=TIMEZONE):
     return event
 
 def list_events(days=7):
-    """Lista os eventos dos próximos X dias."""
+    """Lists events for the next X days."""
     service = get_calendar_service()
     
     now = datetime.utcnow()
@@ -74,7 +74,7 @@ def list_events(days=7):
     return events_result.get('items', [])
 
 def create_custom_calendar(calendar_name, description=""):
-    """Cria um novo calendário personalizado no Google Calendar."""
+    """Creates a new custom calendar in Google Calendar."""
     service = get_calendar_service()
     
     calendar = {
@@ -87,7 +87,7 @@ def create_custom_calendar(calendar_name, description=""):
     return created_calendar
 
 def list_calendar_lists():
-    """Lista todas as agendas disponíveis para o usuário."""
+    """Lists all available calendars for the user."""
     service = get_calendar_service()
     
     calendar_list = service.calendarList().list().execute()

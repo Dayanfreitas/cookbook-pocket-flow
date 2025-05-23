@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 class CreateCalendarEventNode(Node):
     def prep(self, shared):
-        """Prepara os dados necessários para criar um evento."""
+        """Prepares the necessary data to create an event."""
         return {
             'summary': shared.get('event_summary'),
             'description': shared.get('event_description'),
@@ -13,7 +13,7 @@ class CreateCalendarEventNode(Node):
         }
     
     def exec(self, event_data):
-        """Cria um novo evento no calendário."""
+        """Creates a new calendar event."""
         try:
             event = create_event(
                 summary=event_data['summary'],
@@ -26,7 +26,7 @@ class CreateCalendarEventNode(Node):
             return {'success': False, 'error': str(e)}
     
     def post(self, shared, prep_res, exec_res):
-        """Armazena o resultado da criação do evento."""
+        """Stores the event creation result."""
         if exec_res['success']:
             shared['last_created_event'] = exec_res['event']
             return 'success'
@@ -36,13 +36,13 @@ class CreateCalendarEventNode(Node):
 
 class ListCalendarEventsNode(Node):
     def prep(self, shared):
-        """Prepara os parâmetros para listar eventos."""
+        """Prepares parameters to list events."""
         return {
             'days': shared.get('days_to_list', 7)
         }
     
     def exec(self, params):
-        """Lista os eventos do calendário."""
+        """Lists calendar events."""
         try:
             events = list_events(days=params['days'])
             return {'success': True, 'events': events}
@@ -50,7 +50,7 @@ class ListCalendarEventsNode(Node):
             return {'success': False, 'error': str(e)}
     
     def post(self, shared, prep_res, exec_res):
-        """Armazena a lista de eventos."""
+        """Stores the list of events."""
         if exec_res['success']:
             shared['calendar_events'] = exec_res['events']
             return 'success'
@@ -60,11 +60,11 @@ class ListCalendarEventsNode(Node):
 
 class ListCalendarsNode(Node):
     def prep(self, shared):
-        """Não precisa de preparação especial para listar calendários."""
+        """No special preparation needed to list calendars."""
         return {}
 
     def exec(self, params):
-        """Lista todos os calendários disponíveis para o usuário."""
+        """Lists all available calendars for the user."""
         try:
             calendars = list_calendar_lists()
             return {'success': True, 'calendars': calendars}
@@ -72,7 +72,7 @@ class ListCalendarsNode(Node):
             return {'success': False, 'error': str(e)}
 
     def post(self, shared, prep_res, exec_res):
-        """Armazena a lista de calendários no shared store."""
+        """Stores the list of calendars in the shared store."""
         if exec_res['success']:
             shared['available_calendars'] = exec_res['calendars']
             return 'success'

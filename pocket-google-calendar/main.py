@@ -3,26 +3,26 @@ from nodes import CreateCalendarEventNode, ListCalendarEventsNode, ListCalendars
 from datetime import datetime, timedelta
 
 def create_calendar_flow():
-    """Cria um fluxo para gerenciar eventos do calendário."""
-    # Criar os nós
+    """Creates a flow to manage calendar events."""
+    # Create nodes
     create_event_node = CreateCalendarEventNode()
     list_events_node = ListCalendarEventsNode()
     
-    # Conectar os nós
+    # Connect nodes
     create_event_node - "success" >> list_events_node
     create_event_node - "error" >> None
     
-    # Criar o fluxo
+    # Create flow
     return Flow(start=create_event_node)
 
 def list_calendars_flow():
-    """Cria um fluxo para listar todos os calendários do usuário."""
+    """Creates a flow to list all user calendars."""
     list_calendars_node = ListCalendarsNode()
     return Flow(start=list_calendars_node)
 
 def main():
-    # Exemplo: Listar todos os calendários do usuário
-    print("=== Listando todos os seus calendários ===")
+    # Example: List all user calendars
+    print("=== Listing all your calendars ===")
     flow = list_calendars_flow()
     shared = {}
     flow.run(shared)
@@ -30,10 +30,10 @@ def main():
         for cal in shared['available_calendars']:
             print(f"- {cal.get('summary')} (ID: {cal.get('id')})")
     else:
-        print("Nenhum calendário encontrado ou erro na listagem.")
+        print("No calendars found or error listing calendars.")
 
-    # Exemplo anterior: criar evento e listar eventos
-    print("\n=== Criando evento e listando eventos ===")
+    # Previous example: create event and list events
+    print("\n=== Creating event and listing events ===")
     flow = create_calendar_flow()
 
     shared = {
@@ -46,11 +46,11 @@ def main():
 
     flow.run(shared)
     if 'last_created_event' in shared:
-        print("Evento criado com sucesso!")
-        print(f"ID do evento: {shared['last_created_event']['id']}")
+        print("Event created successfully!")
+        print(f"Event ID: {shared['last_created_event']['id']}")
 
     if 'calendar_events' in shared:
-        print("\nEventos dos próximos 7 dias:")
+        print("\nEvents for the next 7 days:")
         for event in shared['calendar_events']:
             start = event['start'].get('dateTime', event['start'].get('date'))
             print(f"- {event['summary']} ({start})")
