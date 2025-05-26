@@ -20,19 +20,6 @@ This project implements a Google Calendar integration using the Pocket Flow fram
 - Google Calendar API
 - Pipenv for dependency management
 
-## 📦 Installation
-
-1. Clone the repository:
-```bash
-git clone [REPOSITORY_URL]
-cd pocket-google-calendar
-```
-
-2. Install dependencies using Pipenv:
-```bash
-pipenv install
-```
-
 ## 🔑 Credentials Setup
 
 1. Go to the [Google Cloud Console](https://console.cloud.google.com/)
