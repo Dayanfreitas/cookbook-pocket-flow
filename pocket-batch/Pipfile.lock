@@ -1,0 +1,38 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "e9ac5103c7207ba70be9749e949912ee505a6cab9bd4d50173d9abb11075be6a"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "3.13"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "pocketflow": {
+            "hashes": [
+                "sha256:16f9cc5cfd68b6e552c736e5b965209b1f464233c62061a2dc3080cb48a22e74",
+                "sha256:9249f05223f1b325a99fa4445d5ab69c89afa1e0e4acecdc1e6109936529e1b7"
+            ],
+            "index": "pypi",
+            "version": "==0.0.2"
+        },
+        "python-dotenv": {
+            "hashes": [
+                "sha256:41f90bc6f5f177fb41f53e87666db362025010eb28f60a01c9143bfa33a2b2d5",
+                "sha256:d7c01d9e2293916c18baf562d95698754b0dbbb5e74d457c45d4f6561fb9d55d"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.9'",
+            "version": "==1.1.0"
+        }
+    },
+    "develop": {}
+}
